@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "IBM Plex Sans Arabic", "Alexandria", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(circle at -10% -10%, rgba(37, 99, 235, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 110% 110%, rgba(147, 51, 234, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 35%);
+  background-attachment: fixed;
+  color: #f1f5f9;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::selection {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+/* Glassmorphism custom classes redesigned for immersive frosted dark visual theme */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  color: #f1f5f9;
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  color: #f1f5f9;
+}
+
+.glass-input {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  color: #f1f5f9;
+}
+
+.glass-input:focus {
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(0, 0, 0, 0.4);
+  outline: none;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.25);
+}
+
+/* Force excellent text visibility for primary head tags */
+h1 {
+  color: #ffffff !important;
+}
+h2 {
+  color: #ffffff !important;
+}
+h3 {
+  color: #f8fafc !important;
+}
+h4 {
+  color: #f1f5f9 !important;
+}
+h5 {
+  color: #e2e8f0 !important;
+}
+
+/* Overlay utility mapping for Slate color overrides to prevent hardcoded text-slate-800 from being unreadable on dark theme */
+.text-slate-900 {
+  color: #ffffff !important;
+}
+.text-slate-850, .text-indigo-850 {
+  color: #c7d2fe !important;
+}
+.text-slate-800 {
+  color: #f1f5f9 !important;
+}
+.text-slate-700 {
+  color: #e2e8f0 !important;
+}
+.text-slate-600 {
+  color: #cbd5e1 !important;
+}
+.text-slate-500 {
+  color: #94a3b8 !important;
+}
+.text-slate-400 {
+  color: #64748b !important;
+}
+
+/* Background mappings */
+.bg-white\/40,
+.bg-white\/50,
+.bg-white\/60,
+.bg-slate-50,
+.bg-indigo-50\/50,
+.bg-indigo-50\/40 {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Accent alerts & cards */
+.bg-indigo-50,
+.bg-indigo-150 {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+  color: #c7d2fe !important;
+}
+
+.text-indigo-600,
+.text-indigo-700,
+.text-indigo-800,
+.text-indigo-900 {
+  color: #a5b4fc !important;
+}
+
+/* Side navigation override */
+aside {
+  background-color: rgba(15, 23, 42, 0.5) !important;
+  backdrop-filter: blur(28px) saturate(170%) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+aside .bg-slate-900 {
+  background-color: transparent !important;
+}
+
+/* Form input styling overrides */
+input, textarea, select {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f8fafc !important;
+  border-radius: 0.75rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  outline: none;
+}
+
+/* Kanban column mappings */
+.bg-slate-100 {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+.bg-blue-100\/40 {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+  border: 1px solid rgba(59, 130, 246, 0.15) !important;
+}
+.bg-amber-100\/40 {
+  background-color: rgba(245, 158, 11, 0.08) !important;
+  border: 1px solid rgba(245, 158, 11, 0.15) !important;
+}
+.bg-red-50\/40 {
+  background-color: rgba(239, 68, 68, 0.08) !important;
+  border: 1px solid rgba(239, 68, 68, 0.15) !important;
+}
+.bg-emerald-50\/40 {
+  background-color: rgba(16, 185, 129, 0.08) !important;
+  border: 1px solid rgba(16, 185, 129, 0.15) !important;
+}
+
+/* General interactive cards */
+.bg-white {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) !important;
+  color: #f1f5f9 !important;
+}
+
+/* G-auth svg holder */
+button svg.bg-white {
+  background-color: #ffffff !important;
+  border: none !important;
+}
+
+/* Modal windows overlay & containers */
+.fixed.inset-0.z-50 {
+  background-color: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.fixed.inset-0.z-50 .bg-white,
+.fixed.inset-0.z-50 .bg-white\/80 {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(32px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Custom Scrollbar for list panels matching the theme design */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-enter {
+  animation: enter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom sound wave visual for counting down timer */
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+.wave-bar {
+  display: inline-block;
+  width: 2px;
+  background-color: #818cf8;
+  border-radius: 99px;
+}
+
+.wave-bar:nth-child(2) { animation: wave 1.2s ease-in-out infinite 0.2s; }
+.wave-bar:nth-child(3) { animation: wave 1s ease-in-out infinite 0.4s; }
+.wave-bar:nth-child(4) { animation: wave 0.8s ease-in-out infinite 0.1s; }

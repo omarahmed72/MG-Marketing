@@ -1,0 +1,6 @@
+{
+  "name": "Mohey el-din Marketing CRM",
+  "description": "نظام مكامل لإدارة مهام وحملات التسويق الرقمي مع أوزان المهام، مؤقت زمني منبه، وتقارير أداء PDF دقيقة",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

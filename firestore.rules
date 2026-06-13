@@ -1,0 +1,129 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Deny-by-Default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Reuseable global helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return request.auth.token.email_verified == true;
+    }
+
+    function getUser(userId) {
+      return get(/databases/$(database)/documents/users/$(userId)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == "mostafakassab572@gmail.com" ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUser(request.auth.uid).role == "admin")
+      );
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // --- Users Collection ---
+    match /users/{userId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      allow create: if isSignedIn() && isOwner(userId) && (
+                    (request.resource.data.role == "member" && request.resource.data.status == "pending") ||
+                    (request.auth.token.email == "mostafakassab572@gmail.com" && request.resource.data.role == "admin" && request.resource.data.status == "active")
+                  );
+                    
+      // Only admins can promote roles/change status. Members can only update workload, specialty or name.
+      allow update: if isSignedIn() && (
+        isAdmin() || (
+          isOwner(userId) && 
+          request.resource.data.role == resource.data.role && 
+          request.resource.data.status == resource.data.status
+        )
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Static Admin collection mapping
+    match /admins/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // --- Tasks Collection ---
+    match /tasks/{taskId} {
+      allow get: if isSignedIn() && (isAdmin() || resource.data.assigneeId == request.auth.uid);
+      allow list: if isSignedIn() && (isAdmin() || resource.data.assigneeId == request.auth.uid);
+      
+      allow create: if isAdmin();
+      
+      // Admin can change anything. Assignee can only change status, remaining time, and running state.
+      allow update: if isSignedIn() && (
+        isAdmin() || (
+          resource.data.assigneeId == request.auth.uid &&
+          request.resource.data.title == resource.data.title &&
+          request.resource.data.assigneeId == resource.data.assigneeId &&
+          request.resource.data.campaignId == resource.data.campaignId &&
+          request.resource.data.priority == resource.data.priority &&
+          request.resource.data.weight == resource.data.weight &&
+          request.resource.data.dueDate == resource.data.dueDate &&
+          (request.resource.data.status == "progress" || request.resource.data.status == "todo" || request.resource.data.status == "review" || request.resource.data.status == "rejected" || request.resource.data.status == resource.data.status)
+        )
+      );
+      
+      allow delete: if isAdmin();
+    }
+
+    // --- Reports Collection ---
+    match /reports/{reportId} {
+      allow get: if isSignedIn() && (isAdmin() || resource.data.memberId == request.auth.uid);
+      allow list: if isSignedIn() && (isAdmin() || resource.data.memberId == request.auth.uid);
+      
+      allow create: if isSignedIn() && request.resource.data.memberId == request.auth.uid;
+      
+      // Manager reviews status, stars, and feedback. Member can only post rejection explanations and comment files.
+      allow update: if isSignedIn() && (
+        isAdmin() || (
+          resource.data.memberId == request.auth.uid &&
+          request.resource.data.status == resource.data.status &&
+          request.resource.data.starsAwarded == resource.data.starsAwarded &&
+          request.resource.data.adminFeedback == resource.data.adminFeedback
+        )
+      );
+      
+      allow delete: if isAdmin();
+    }
+
+    // --- Campaigns Collection ---
+    match /campaigns/{campaignId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // --- Specialties Collection ---
+    match /specialties/{specialtyId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // --- Notifications Collection ---
+    match /notifications/{notificationId} {
+      allow read: if isSignedIn() && (isAdmin() || resource.data.recipientId == request.auth.uid);
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && (isAdmin() || resource.data.recipientId == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+  }
+}
