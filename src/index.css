@@ -1,22 +1,45 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Madani Arabic';
+  src: url('../font/Madani\\ Arabic\\ Semi\\ Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
 
 @theme {
-  --font-sans: "IBM Plex Sans Arabic", "Alexandria", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Madani Arabic", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* {
+  font-family: 'Madani Arabic', sans-serif !important;
 }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background-color: #0f172a;
+  /* background-color: #0f172a; */
+  background-color: #ebebdf;
   background-image:
-    radial-gradient(circle at -10% -10%, rgba(37, 99, 235, 0.18) 0%, transparent 45%),
-    radial-gradient(circle at 110% 110%, rgba(147, 51, 234, 0.18) 0%, transparent 45%),
-    radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 35%);
+    radial-gradient(
+      circle at -10% -10%,
+      rgba(37, 99, 235, 0.18) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 110% 110%,
+      rgba(147, 51, 234, 0.18) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(16, 185, 129, 0.08) 0%,
+      transparent 35%
+    );
   background-attachment: fixed;
-  color: #f1f5f9;
+  /* color: #f1f5f9; */
+  color: #191265;
   min-height: 100vh;
   position: relative;
 }
@@ -29,11 +52,15 @@ body::selection {
 .glass-panel {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
-  color: #f1f5f9;
+  /* color: #f1f5f9; */
+  color: #0b4a7d;
 }
+
 
 .glass-pill {
   background: rgba(255, 255, 255, 0.08);
@@ -58,44 +85,46 @@ body::selection {
 
 /* Force excellent text visibility for primary head tags */
 h1 {
-  color: #ffffff !important;
+  color: #191265 !important;
 }
 h2 {
-  color: #ffffff !important;
+  color: #191265 !important;
 }
 h3 {
-  color: #f8fafc !important;
+  color: #191265 !important;
 }
 h4 {
-  color: #f1f5f9 !important;
+  color: #191265 !important;
 }
 h5 {
-  color: #e2e8f0 !important;
+  color: #191265 !important;
 }
 
 /* Overlay utility mapping for Slate color overrides to prevent hardcoded text-slate-800 from being unreadable on dark theme */
-.text-slate-900 {
-  color: #ffffff !important;
-}
-.text-slate-850, .text-indigo-850 {
-  color: #c7d2fe !important;
-}
-.text-slate-800 {
-  color: #f1f5f9 !important;
-}
-.text-slate-700 {
-  color: #e2e8f0 !important;
-}
-.text-slate-600 {
-  color: #cbd5e1 !important;
-}
-.text-slate-500 {
-  color: #94a3b8 !important;
-}
+/* .text-slate-900,
+.text-slate-850,
+.text-indigo-850,
+.text-slate-800,
+.text-slate-700,
 .text-slate-400 {
-  color: #64748b !important;
+  color: #191265 !important;
+} */
+
+.text-slate-900,
+.text-indigo-850,
+.text-slate-800,
+.text-slate-700,
+.text-slate-500,
+.text-slate-400 {
+  color: #0b4a7d !important;
 }
 
+.text-slate-600 {
+  color: #449ed7;
+}
+.text-slate-850{
+  color: #191265;
+}
 /* Background mappings */
 .bg-white\/40,
 .bg-white\/50,
@@ -103,8 +132,18 @@ h5 {
 .bg-slate-50,
 .bg-indigo-50\/50,
 .bg-indigo-50\/40 {
-  background-color: rgba(255, 255, 255, 0.03) !important;
+  /* background-color: rgba(255, 255, 255, 0.03) !important; */
+  background-color: rgba(255, 255, 255) !important;
   border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.bg-indigo-600 {
+  /* background-color: rgba(255, 255, 255, 0.03) !important; */
+  background-color: #191265 !important;
+  /* border-color: rgba(255, 255, 255, 0.08) !important; */
+}
+
+.bg-indigo-500 {
+  background-color: #449ed7 !important;
 }
 
 /* Accent alerts & cards */
@@ -124,7 +163,8 @@ h5 {
 
 /* Side navigation override */
 aside {
-  background-color: rgba(15, 23, 42, 0.5) !important;
+  /* background-color: rgba(15, 23, 42, 0.5) !important; */
+  background-color: rgb(193 196 204 / 50%) !important;
   backdrop-filter: blur(28px) saturate(170%) !important;
   border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
@@ -134,14 +174,18 @@ aside .bg-slate-900 {
 }
 
 /* Form input styling overrides */
-input, textarea, select {
+input,
+textarea,
+select {
   background-color: rgba(0, 0, 0, 0.25) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: #f8fafc !important;
+  /* color: #f8fafc !important; */
   border-radius: 0.75rem;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   border-color: rgba(99, 102, 241, 0.5) !important;
   outline: none;
 }
@@ -173,7 +217,7 @@ input:focus, textarea:focus, select:focus {
   background-color: rgba(255, 255, 255, 0.04) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(14px) !important;
-  color: #f1f5f9 !important;
+  /* color: #f1f5f9 !important; */
 }
 
 /* G-auth svg holder */
@@ -188,13 +232,13 @@ button svg.bg-white {
   backdrop-filter: blur(8px) !important;
 }
 
-.fixed.inset-0.z-50 .bg-white,
+/* .fixed.inset-0.z-50 .bg-white,
 .fixed.inset-0.z-50 .bg-white\/80 {
   background-color: rgba(15, 23, 42, 0.95) !important;
   backdrop-filter: blur(32px) !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-}
+} */
 
 /* Custom Scrollbar for list panels matching the theme design */
 ::-webkit-scrollbar {
@@ -229,8 +273,13 @@ button svg.bg-white {
 
 /* Custom sound wave visual for counting down timer */
 @keyframes wave {
-  0%, 100% { height: 4px; }
-  50% { height: 16px; }
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 16px;
+  }
 }
 
 .wave-bar {
@@ -240,6 +289,12 @@ button svg.bg-white {
   border-radius: 99px;
 }
 
-.wave-bar:nth-child(2) { animation: wave 1.2s ease-in-out infinite 0.2s; }
-.wave-bar:nth-child(3) { animation: wave 1s ease-in-out infinite 0.4s; }
-.wave-bar:nth-child(4) { animation: wave 0.8s ease-in-out infinite 0.1s; }
+.wave-bar:nth-child(2) {
+  animation: wave 1.2s ease-in-out infinite 0.2s;
+}
+.wave-bar:nth-child(3) {
+  animation: wave 1s ease-in-out infinite 0.4s;
+}
+.wave-bar:nth-child(4) {
+  animation: wave 0.8s ease-in-out infinite 0.1s;
+}

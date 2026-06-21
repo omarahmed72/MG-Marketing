@@ -80,9 +80,8 @@ export function printPerformancePdf(stats: EmployeeStats) {
       <head>
         <title>تقرير الأداء التحليلي - ${stats.name}</title>
         <style>
-          @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
           body {
-            font-family: 'IBM Plex Sans Arabic', 'Alexandria', sans-serif;
+            font-family: 'Madani Arabic', sans-serif;
             background: #ffffff;
             color: #101b33;
             margin: 0;
@@ -97,7 +96,7 @@ export function printPerformancePdf(stats: EmployeeStats) {
             margin-bottom: 30px;
           }
           .header h1 {
-            font-family: 'Alexandria', sans-serif;
+            font-family: 'Madani Arabic', sans-serif;
             font-size: 20px;
             margin: 0;
             color: #0b214a;
@@ -175,7 +174,7 @@ export function printPerformancePdf(stats: EmployeeStats) {
             margin-bottom: 30px;
           }
           .evaluation-panel h2 {
-            font-family: 'Alexandria', sans-serif;
+            font-family: 'Madani Arabic', sans-serif;
             font-size: 14px;
             margin: 0 0 10px;
             color: #1677ff;

@@ -88,7 +88,7 @@ export interface CRMNotification {
   recipientId: string;
   title: string;
   message: string;
-  type: "tasks" | "team" | "review" | "rating";
+  type: "tasks" | "team" | "review" | "rating" | "registration";
   read: boolean;
   createdAt: string;
 }

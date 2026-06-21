@@ -1,0 +1,31 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: moheyeldin-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: moheyeldin-crm
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: moheyeldin-server
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/moheyeldin-crm
+      JWT_SECRET: ${JWT_SECRET:-dev-secret}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      CLIENT_URL: http://localhost:3000
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
+
+volumes:
+  mongo-data:
